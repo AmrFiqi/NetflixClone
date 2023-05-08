@@ -9,10 +9,13 @@ import UIKit
 
 class DownloadsViewController: UIViewController {
 
+    
+    // MARK: - Class Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .systemCyan
+        view.backgroundColor = .systemBackground
     }
     
 }
