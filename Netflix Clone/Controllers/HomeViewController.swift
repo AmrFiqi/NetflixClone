@@ -27,8 +27,9 @@ class HomeViewController: UIViewController {
         
         // Add the table view the the HomeViewController
         view.addSubview(homeFeedTable)
-        homeFeedTable.delegate = self
-        homeFeedTable.dataSource = self
+        setupSubView(homeFeedTable)
+        setupHeaderView(homeFeedTable)
+        configNavBar()
     }
     
     override func viewDidLayoutSubviews() {
@@ -36,6 +37,25 @@ class HomeViewController: UIViewController {
         
         // View covers all bounds of the screen
         homeFeedTable.frame = view.bounds
+    }
+    
+    func setupSubView(_ view: UITableView){
+        view.delegate = self
+        view.dataSource = self
+    }
+    
+    func setupHeaderView(_ view: UITableView){
+        let headerView = HeroHeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        view.tableHeaderView = headerView
+    }
+    
+    private func configNavBar() {
+        var image = UIImage(named: "netflixLogo")
+        image = image?.withRenderingMode(.alwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil)
+        ]
     }
 }
 
