@@ -21,7 +21,6 @@
 		E5AAE7732A092E8300FF40EC /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AAE7722A092E8300FF40EC /* CollectionViewTableViewCell.swift */; };
 		E5ED83E02A110CD7001E0517 /* TrendingMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED83DF2A110CD7001E0517 /* TrendingMoviesResponse.swift */; };
 		E5ED83E22A110F8F001E0517 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED83E12A110F8F001E0517 /* Extensions.swift */; };
-		E5ED83E42A111A34001E0517 /* TrendingTvsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED83E32A111A34001E0517 /* TrendingTvsResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +40,6 @@
 		E5AAE7722A092E8300FF40EC /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCell.swift; sourceTree = "<group>"; };
 		E5ED83DF2A110CD7001E0517 /* TrendingMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMoviesResponse.swift; sourceTree = "<group>"; };
 		E5ED83E12A110F8F001E0517 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		E5ED83E32A111A34001E0517 /* TrendingTvsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingTvsResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				E5ED83DF2A110CD7001E0517 /* TrendingMoviesResponse.swift */,
-				E5ED83E32A111A34001E0517 /* TrendingTvsResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -213,7 +210,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5AAE76A2A09258600FF40EC /* SearchViewController.swift in Sources */,
-				E5ED83E42A111A34001E0517 /* TrendingTvsResponse.swift in Sources */,
 				E5AAE7552A09236700FF40EC /* MainTabBarViewController.swift in Sources */,
 				E5ED83E02A110CD7001E0517 /* TrendingMoviesResponse.swift in Sources */,
 				E5AAE7732A092E8300FF40EC /* CollectionViewTableViewCell.swift in Sources */,

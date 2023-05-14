@@ -23,10 +23,10 @@ class HomeViewController: UIViewController {
     let apiCaller = APICaller()
     
     // MARK: - Class Methods
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .systemBackground
         
         // Add the table view the the HomeViewController
@@ -67,8 +67,8 @@ class HomeViewController: UIViewController {
     }
     
     private func getTrendingMovies() {
-        APICaller.shared.getPopular{ results in
-            switch results {
+        APICaller.shared.makeAPIRequest(endpoint: Constants.popular, responseType: TrendingTitleResponse.self) { result in
+            switch result {
             case .success(let movies):
                 print(movies)
             case .failure(let error):
@@ -76,19 +76,20 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    
-    
-    private func getTrendingTvs() {
-        APICaller.shared.getTrendingTvs { results in
-            switch results {
-            case .success(let tvs):
-                print(tvs)
-            case .failure(let error):
-                print(error)
-            }
+}
+
+
+private func getTrendingTvs() {
+    APICaller.shared.makeAPIRequest(endpoint: Constants.trendingTvs, responseType: TrendingTitleResponse.self) { result in
+        switch result {
+        case .success(let movies):
+            print(movies)
+        case .failure(let error):
+            print(error)
         }
     }
 }
+
 
 // MARK: - Home View Controller Extensions
 
@@ -133,7 +134,7 @@ extension HomeViewController: UITableViewDataSource {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let defaulOffset = view.safeAreaInsets.top
         let offset = scrollView.contentOffset.y + defaulOffset
-        	
+        
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
     }
     
