@@ -35,6 +35,7 @@ class HomeViewController: UIViewController {
         setupHeaderView(homeFeedTable)
         configNavBar()
         getTrendingMovies()
+        //getTrendingTvs()
     }
     
     override func viewDidLayoutSubviews() {
@@ -66,10 +67,22 @@ class HomeViewController: UIViewController {
     }
     
     private func getTrendingMovies() {
-        APICaller.shared.getTrendingMovies { results in
+        APICaller.shared.getPopular{ results in
             switch results {
             case .success(let movies):
                 print(movies)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    private func getTrendingTvs() {
+        APICaller.shared.getTrendingTvs { results in
+            switch results {
+            case .success(let tvs):
+                print(tvs)
             case .failure(let error):
                 print(error)
             }
