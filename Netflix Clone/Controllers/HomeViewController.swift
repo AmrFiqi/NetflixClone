@@ -20,6 +20,8 @@ class HomeViewController: UIViewController {
     
     let sectionTitles: [String] = ["Trending Movies", "Popular", "Trending TV", "Upcoming Movies", "Top rated"]
     
+    let apiCaller = APICaller()
+    
     // MARK: - Class Methods
 
     override func viewDidLoad() {
@@ -32,6 +34,7 @@ class HomeViewController: UIViewController {
         setupSubView(homeFeedTable)
         setupHeaderView(homeFeedTable)
         configNavBar()
+        getTrendingMovies()
     }
     
     override func viewDidLayoutSubviews() {
@@ -60,6 +63,17 @@ class HomeViewController: UIViewController {
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil),
         ]
         navigationController?.navigationBar.tintColor = .white
+    }
+    
+    private func getTrendingMovies() {
+        APICaller.shared.getTrendingMovies { results in
+            switch results {
+            case .success(let movies):
+                print(movies)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
@@ -92,7 +106,7 @@ extension HomeViewController: UITableViewDelegate {
         header.textLabel?.frame = CGRect(x: header.bounds.origin.x + 20 , y: header.bounds.origin.y, width: 100, height: header.bounds.height)
         header.textLabel?.textColor = .white
         header.textLabel?.text = header.textLabel?.text?.lowercased()
-        header.textLabel?.text = header.textLabel?.text?.capitalizeFirstLetter()
+        header.textLabel?.text = header.textLabel?.text?.capitalizingFirstLetter()
     }
 }
 
@@ -106,17 +120,9 @@ extension HomeViewController: UITableViewDataSource {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let defaulOffset = view.safeAreaInsets.top
         let offset = scrollView.contentOffset.y + defaulOffset
-        
+        	
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
     }
     
     
-}
-
-// MARK: - General Extention
-
-extension String {
-    func capitalizeFirstLetter() -> String {
-        return prefix(1).capitalized + dropFirst()
-    }
 }
