@@ -7,6 +7,16 @@
 
 import UIKit
 
+// MARK: - Enum
+
+enum Sections: Int {
+    case TrendingMovies = 0
+    case TrendingTv = 1
+    case Popular = 2
+    case Upcoming = 3
+    case TopRated = 4
+}
+
 class HomeViewController: UIViewController {
     
     // MARK: - Class Variables
@@ -18,7 +28,7 @@ class HomeViewController: UIViewController {
         return table
     }()
     
-    let sectionTitles: [String] = ["Trending Movies", "Popular", "Trending TV", "Upcoming Movies", "Top rated"]
+    let sectionTitles: [String] = ["Trending Movies", "Trending TV", "Popular", "Upcoming Movies", "Top rated"]
     
     let apiCaller = APICaller()
     
@@ -128,7 +138,32 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else {return UITableViewCell()}
+        
+        switch indexPath.section {
+        case Sections.TrendingMovies.rawValue:
+            apiCall(endpoint: Constants.trendingMovies, cells: cell)
+        case Sections.TrendingTv.rawValue:
+            apiCall(endpoint: Constants.trendingTvs, cells: cell)
+        case Sections.Popular.rawValue:
+            apiCall(endpoint: Constants.popular, cells: cell)
+        case Sections.Upcoming.rawValue:
+            apiCall(endpoint: Constants.upcomingMovies, cells: cell)
+        case Sections.TopRated.rawValue:
+            apiCall(endpoint: Constants.topRated, cells: cell)
+        default: return UITableViewCell();
+        }
         return cell
+    }
+    
+    private func apiCall(endpoint: String, cells: CollectionViewTableViewCell) {
+        APICaller.shared.makeAPIRequest(endpoint: endpoint, responseType: TrendingTitleResponse.self) { result in
+            switch result {
+            case .success(let titles):
+                cells.configure(with: titles.results)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
